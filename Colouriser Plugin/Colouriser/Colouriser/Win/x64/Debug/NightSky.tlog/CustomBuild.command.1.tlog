@@ -1,0 +1,4 @@
+^E:\PLUGINS\LEARNING\ADOBE AFTER EFFECTS CC 15.0 WIN SDK\EXAMPLES\NIGHT SKY\SKELETON\NIGHTSKYPIPL.R
+cl /I "E:\Plugins\Learning\Adobe After Effects CC 15.0 Win SDK\Examples\Night Sky\Skeleton\Win\..\..\..\Headers" /EP ".."\\"NightSkyPiPL.r" > "x64\Debug\"\\"NightSkyPiPL.rr"
+"E:\Plugins\Learning\Adobe After Effects CC 15.0 Win SDK\Examples\Night Sky\Skeleton\Win\..\..\..\Resources\PiPLTool" "x64\Debug\NightSkyPiPL.rr" "x64\Debug\NightSkyPiPL.rrc"
+cl /D "MSWindows" /EP x64\Debug\NightSkyPiPL.rrc >               "E:\Plugins\Learning\Adobe After Effects CC 15.0 Win SDK\Examples\Night Sky\Skeleton\Win\"\\"NightSkyPiPL".rc
