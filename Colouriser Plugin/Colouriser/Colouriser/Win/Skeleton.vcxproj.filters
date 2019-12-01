@@ -73,10 +73,10 @@
     <ClInclude Include="..\..\..\Headers\AE_PluginData.h">
       <Filter>Headers\AE</Filter>
     </ClInclude>
-    <ClInclude Include="..\NightSky.h">
+    <ClInclude Include="..\Colouriser.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\NightSky_Strings.h">
+    <ClInclude Include="..\Colouriser_Strings.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -87,16 +87,16 @@
     <ClCompile Include="..\..\..\Util\MissingSuiteError.cpp">
       <Filter>Supporting code</Filter>
     </ClCompile>
-    <ClCompile Include="..\NightSky.cpp" />
-    <ClCompile Include="..\NightSky_Strings.cpp" />
+    <ClCompile Include="..\Colouriser.cpp" />
+    <ClCompile Include="..\Colouriser_Strings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\NightSkyPiPL.r">
+    <CustomBuild Include="..\ColouriserPiPL.r">
       <Filter>Resources</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NightSkyPiPL.rc">
+    <ResourceCompile Include="ColouriserPiPL.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>

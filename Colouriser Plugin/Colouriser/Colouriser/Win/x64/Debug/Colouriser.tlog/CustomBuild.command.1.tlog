@@ -1,0 +1,4 @@
+^C:\USERS\NATE\DOCUMENTS\GITHUB\AE-COLOURISER-PLUGIN\COLOURISER PLUGIN\COLOURISER\COLOURISER\COLOURISERPIPL.R
+cl /I "C:\Users\Nate\Documents\GitHub\ae-colouriser-plugin\Colouriser Plugin\Colouriser\Colouriser\Win\..\..\..\Headers" /EP ".."\\"ColouriserPiPL.r" > "x64\Debug\"\\"ColouriserPiPL.rr"
+"C:\Users\Nate\Documents\GitHub\ae-colouriser-plugin\Colouriser Plugin\Colouriser\Colouriser\Win\..\..\..\Resources\PiPLTool" "x64\Debug\ColouriserPiPL.rr" "x64\Debug\ColouriserPiPL.rrc"
+cl /D "MSWindows" /EP x64\Debug\ColouriserPiPL.rrc >               "C:\Users\Nate\Documents\GitHub\ae-colouriser-plugin\Colouriser Plugin\Colouriser\Colouriser\Win\"\\"ColouriserPiPL".rc
