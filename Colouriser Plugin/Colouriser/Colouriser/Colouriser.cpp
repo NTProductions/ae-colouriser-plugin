@@ -93,233 +93,168 @@ ParamsSetup (
 	PF_Err		err		= PF_Err_NONE;
 	PF_ParamDef	def;	
 
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_POPUPX(	STR(StrID_Preset_Param_Name),
-							2,
-							2,
-							"Custom|Standard",
-							0,
-							PRESET_DISK_ID);
+	// colour 1
 
 	AEFX_CLR_STRUCT(def);
 
-	PF_ADD_FLOAT_SLIDERX(	STR(StrID_Num_Stars_Param_Name),
-					0,
-					100,
-					0,
-					100,
-					100,
-					PF_Precision_INTEGER,
-					0,
-					0,
-					NUM_STARS_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Size_Param_Name),
-		0.0,
-		50.0,
-		0.0,
-		50.0,
-		50.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		SIZE_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Size_Random_Param_Name),
-		0.0,
-		50.0,
-		0.0,
-		50.0,
-		50.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		SIZE_RANDOM_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Glow_Intensity_Param_Name),
-		0.0,
-		100.0,
-		0.0,
-		100.0,
-		50.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		GLOW_INTENSITY_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Glow_Radius_Param_Name),
-		0.0,
-		100.0,
-		0.0,
-		100.0,
-		50.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		GLOW_RADIUS_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Random_Seed_Param_Name),
-		1,
-		9999,
-		1,
-		9999,
-		9999,
-		PF_Precision_INTEGER,
-		0,
-		0,
-		RANDOM_SEED_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_TOPIC(STR(StrID_Flicker_Param_Name),
-		FLICKER_START_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_CHECKBOXX(STR(StrID_Enabled_Param_Name),
-		0,
-		0,
-		ENABLED_DISK_ID);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Speed_Param_Name),
-		0.0,
-		100.0,
-		0.0,
-		100.0,
-		10.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		SPEED_DISK_ID);
-
-	PF_ADD_FLOAT_SLIDERX(STR(StrID_Amount_Param_Name),
-		0.0,
-		100.0,
-		0.0,
-		100.0,
-		20.0,
-		PF_Precision_TENTHS,
-		0,
-		0,
-		AMOUNT_DISK_ID);
-
-	PF_ADD_CHECKBOXX(STR(StrID_Colour_Random_Param_Name),
-		0,
-		0,
-		COLOUR_RANDOM_DISK_ID);
-
-	PF_END_TOPIC(FLICKER_END_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_TOPIC(STR(StrID_Colour_Controls_Param_Name),
-		COLOUR_CONTROLS_START_DISK_ID);
-
-	AEFX_CLR_STRUCT(def);
-
-	PF_ADD_CHECKBOXX(STR(StrID_Colour1_Enabled_Param_Name),
+	PF_ADD_CHECKBOXX(STR(StrID_ColourOneParamOne),
 		1,
 		0,
-		COLOUR1_ENABLED_DISK_ID);
+		CONEPONE_DISK_ID);
 
-	PF_ADD_COLOR(STR(StrID_Colour1_Param_Name),
-		255,
-		126,
-		126,
-		COLOUR1_DISK_ID);
 
-	PF_ADD_CHECKBOXX(STR(StrID_Colour2_Enabled_Param_Name),
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(STR(StrID_ColourOneParamTwo),
+		0.0,
+		1.0,
+		0.0,
+		1.0,
+		1.0,
+		PF_Precision_HUNDREDTHS,
+		0,
+		0,
+		CONEPTWO_DISK_ID);
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_COLOR(STR(StrID_ColourOneParamThree),
+		PF_MAX_CHAN8,
+		0,
+		0,
+		CONEPTHREE_DISK_ID);
+
+	// colour 2
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_CHECKBOXX(STR(StrID_ColourTwoParamOne),
 		1,
 		0,
-		COLOUR2_ENABLED_DISK_ID);
+		CTWOPONE_DISK_ID);
 
-	PF_ADD_COLOR(STR(StrID_Colour2_Param_Name),
-		255,
-		202,
-		138,
-		COLOUR2_DISK_ID);
 
-	PF_ADD_CHECKBOXX(STR(StrID_Colour3_Enabled_Param_Name),
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(STR(StrID_ColourTwoParamTwo),
+		0.0,
+		1.0,
+		0.0,
+		1.0,
+		1.0,
+		PF_Precision_HUNDREDTHS,
+		0,
+		0,
+		CTWOPTWO_DISK_ID);
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_COLOR(STR(StrID_ColourTwoParamThree),
+		0,
+		PF_MAX_CHAN8,
+		0,
+		CTWOPTHREE_DISK_ID);
+
+	// colour 3
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_CHECKBOXX(STR(StrID_ColourThreeParamOne),
 		1,
 		0,
-		COLOUR3_ENABLED_DISK_ID);
+		CTHREEPONE_DISK_ID);
 
-	PF_ADD_COLOR(STR(StrID_Colour3_Param_Name),
-		99,
-		137,
-		255,
-		COLOUR3_DISK_ID);
 
-	PF_ADD_CHECKBOXX(STR(StrID_Colour4_Enabled_Param_Name),
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(STR(StrID_ColourThreeParamTwo),
+		0.0,
+		1.0,
+		0.0,
+		1.0,
+		1.0,
+		PF_Precision_HUNDREDTHS,
 		0,
 		0,
-		COLOUR4_ENABLED_DISK_ID);
+		CTHREEPTWO_DISK_ID);
 
-	PF_ADD_COLOR(STR(StrID_Colour4_Param_Name),
-		200,
-		213,
-		255,
-		COLOUR4_DISK_ID);
+	AEFX_CLR_STRUCT(def);
 
-	PF_ADD_CHECKBOXX(STR(StrID_Colour5_Enabled_Param_Name),
+	PF_ADD_COLOR(STR(StrID_ColourThreeParamThree),
 		0,
 		0,
-		COLOUR5_ENABLED_DISK_ID);
+		PF_MAX_CHAN8,
+		CTHREEPTHREE_DISK_ID);
 
-	PF_ADD_COLOR(STR(StrID_Colour5_Param_Name),
-		255,
-		255,
-		255,
-		COLOUR5_DISK_ID);
+	// colour 4
 
-	PF_END_TOPIC(COLOUR_CONTROLS_END_DISK_ID);
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_CHECKBOXX(STR(StrID_ColourFourParamOne),
+		1,
+		0,
+		CFOURPONE_DISK_ID);
+
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(STR(StrID_ColourFourParamTwo),
+		0.0,
+		1.0,
+		0.0,
+		1.0,
+		1.0,
+		PF_Precision_HUNDREDTHS,
+		0,
+		0,
+		CFOURPTWO_DISK_ID);
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_COLOR(STR(StrID_ColourFourParamThree),
+		PF_MAX_CHAN8/2,
+		0,
+		PF_MAX_CHAN8/2,
+		CFOURPTHREE_DISK_ID);
+
+	// colour 5
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_CHECKBOXX(STR(StrID_ColourFiveParamOne),
+		1,
+		0,
+		CFIVEPONE_DISK_ID);
+
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_FLOAT_SLIDERX(STR(StrID_ColourFiveParamTwo),
+		0.0,
+		1.0,
+		0.0,
+		1.0,
+		1.0,
+		PF_Precision_HUNDREDTHS,
+		0,
+		0,
+		CFIVEPTWO_DISK_ID);
+
+	AEFX_CLR_STRUCT(def);
+
+	PF_ADD_COLOR(STR(StrID_ColourFiveParamThree),
+		0,
+		PF_MAX_CHAN8,
+		PF_MAX_CHAN8,
+		CFIVEPTHREE_DISK_ID);
 	
-	out_data->num_params = NIGHTSKY_NUM_PARAMS;
+	out_data->num_params = COLOURISER_NUM_PARAMS;
 
 	return err;
 }
 
 static PF_Err
-MySimpleGainFunc16 (
-	void		*refcon, 
-	A_long		xL, 
-	A_long		yL, 
-	PF_Pixel16	*inP, 
-	PF_Pixel16	*outP)
-{
-	PF_Err		err = PF_Err_NONE;
-
-	GainInfo	*giP	= reinterpret_cast<GainInfo*>(refcon);
-	PF_FpLong	tempF	= 0;
-					
-	if (giP){
-		tempF = giP->gainF * PF_MAX_CHAN16 / 100.0;
-		if (tempF > PF_MAX_CHAN16){
-			tempF = PF_MAX_CHAN16;
-		};
-
-		outP->alpha		=	inP->alpha;
-		outP->red		=	MIN((inP->red	+ (A_u_char) tempF), PF_MAX_CHAN16);
-		outP->green		=	MIN((inP->green	+ (A_u_char) tempF), PF_MAX_CHAN16);
-		outP->blue		=	MIN((inP->blue	+ (A_u_char) tempF), PF_MAX_CHAN16);
-	}
-
-	return err;
-}
-
-static PF_Err
-MySimpleGainFunc8 (
+colourise8BPC (
 	void		*refcon, 
 	A_long		xL, 
 	A_long		yL, 
@@ -362,27 +297,16 @@ Render (
 	A_long				linesL	= 0;
 
 	linesL 		= output->extent_hint.bottom - output->extent_hint.top;
-	//giP.gainF 	= params[NIGHTSKY_NUM_STARS]->u.fs_d.value;
-	
-	if (PF_WORLD_IS_DEEP(output)){
-		ERR(suites.Iterate16Suite1()->iterate(	in_data,
-												0,								// progress base
-												linesL,							// progress final
-												&params[NIGHTSKY_INPUT]->u.ld,	// src 
-												NULL,							// area - null for all pixels
-												(void*)&giP,					// refcon - your custom data pointer
-												MySimpleGainFunc16,				// pixel function pointer
-												output));
-	} else {
+	//giP.gainF 	= params[NIGHTSKY_NUM_STARS]->u.fs_d.value; 
 		ERR(suites.Iterate8Suite1()->iterate(	in_data,
 												0,								// progress base
 												linesL,							// progress final
-												&params[NIGHTSKY_INPUT]->u.ld,	// src 
+												&params[COLOURISER_INPUT]->u.ld,	// src 
 												NULL,							// area - null for all pixels
 												(void*)&giP,					// refcon - your custom data pointer
-												MySimpleGainFunc8,				// pixel function pointer
+			colourise8BPC,				// pixel function pointer
 												output));	
-	}
+	
 
 	return err;
 }
@@ -401,7 +325,7 @@ PF_Err PluginDataEntryFunction(
 	result = PF_REGISTER_EFFECT(
 		inPtr,
 		inPluginDataCallBackPtr,
-		"Night Sky", // Name
+		"Colouriser", // Name
 		"NT Colouriser", // Match Name
 		"NT Productions", // Category
 		AE_RESERVED_INFO); // Reserved Info

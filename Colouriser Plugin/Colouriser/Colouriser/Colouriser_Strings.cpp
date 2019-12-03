@@ -29,31 +29,28 @@ typedef struct {
 
 
 TableString		g_strs[StrID_NUMTYPES] = {
-	StrID_Name,						"Night Sky",
-	StrID_Description,				"Generate a night sky quickly",
-	StrID_Preset_Param_Name,			"Preset",
-	StrID_Num_Stars_Param_Name,			"Number of Stars",
-	StrID_Size_Param_Name,			"Size",
-	StrID_Size_Random_Param_Name,			"Size Random",
-	StrID_Glow_Intensity_Param_Name,			"Glow Intensity",
-	StrID_Glow_Radius_Param_Name,			"Glow Radius",
-	StrID_Random_Seed_Param_Name,			"Random Seed",
-	StrID_Flicker_Param_Name,			"Flicker",
-	StrID_Enabled_Param_Name,			"Enabled",
-	StrID_Speed_Param_Name,			"Speed",
-	StrID_Amount_Param_Name,			"Amount",
-	StrID_Colour_Random_Param_Name,			"Colour Random",
-	StrID_Colour_Controls_Param_Name,			"Colour Controls",
-	StrID_Colour1_Enabled_Param_Name,			"Colour 1 Enabled",
-	StrID_Colour1_Param_Name,			"Color 1",
-	StrID_Colour2_Enabled_Param_Name,			"Color 2 Enabled",
-	StrID_Colour2_Param_Name,			"Color 2",
-	StrID_Colour3_Enabled_Param_Name,			"Color 3 Enabled",
-	StrID_Colour3_Param_Name,			"Color 3",
-	StrID_Colour4_Enabled_Param_Name,			"Color 4 Enabled",
-	StrID_Colour4_Param_Name,			"Color 4",
-	StrID_Colour5_Enabled_Param_Name,			"Color 5 Enabled",
-	StrID_Colour5_Param_Name,			"Color 5"
+	StrID_Name,						"Colouriser",
+	StrID_Description,				"Add colour to your B&W imagery",
+	StrID_ColourOneParamOne,  "Colour 1",
+	StrID_ColourOneParamTwo,  "Colour 1 Threshold",
+	StrID_ColourOneParamThree,  "",
+
+	StrID_ColourTwoParamOne,  "Colour 2",
+	StrID_ColourTwoParamTwo,  "Colour 2 Threshold",
+	StrID_ColourTwoParamThree,  "",
+
+	StrID_ColourThreeParamOne,  "Colour 3",
+	StrID_ColourThreeParamTwo,  "Colour 3 Threshold",
+	StrID_ColourThreeParamThree,  "",
+
+	StrID_ColourFourParamOne,  "Colour 4",
+	StrID_ColourFourParamTwo,  "Colour 4 Threshold",
+	StrID_ColourFourParamThree,  "",
+
+	StrID_ColourFiveParamOne,  "Colour 5",
+	StrID_ColourFiveParamTwo,  "Colour 5 Threshold",
+	StrID_ColourFiveParamThree,  ""
+	
 };
 
 
