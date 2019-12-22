@@ -1,8 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NightSky", "Skeleton.vcxproj", "{2C8DED3E-111D-4272-A54A-F1865F02A90E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Colouriser", "Colouriser.vcxproj", "{2C8DED3E-111D-4272-A54A-F1865F02A90E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,8 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x64.ActiveCfg = Debug|x64
 		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x64.Build.0 = Debug|x64
-		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x86.ActiveCfg = Debug|Win32
-		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x86.Build.0 = Debug|Win32
+		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x86.ActiveCfg = Debug|x64
+		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Debug|x86.Build.0 = Debug|x64
 		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Release|x64.ActiveCfg = Release|x64
 		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Release|x64.Build.0 = Release|x64
 		{2C8DED3E-111D-4272-A54A-F1865F02A90E}.Release|x86.ActiveCfg = Release|Win32
@@ -25,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0A38C5A3-ADF2-401C-9B83-95DFA5082CDD}
+		SolutionGuid = {580543CA-D852-44E4-BBEE-19E9FF5EDB8E}
 	EndGlobalSection
 EndGlobal

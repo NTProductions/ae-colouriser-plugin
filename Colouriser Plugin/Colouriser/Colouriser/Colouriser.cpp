@@ -93,7 +93,7 @@ ParamsSetup (
 	PF_Err		err		= PF_Err_NONE;
 	PF_ParamDef	def;	
 
-	// colour 1
+	//  colour 1
 
 	AEFX_CLR_STRUCT(def);
 
@@ -110,7 +110,7 @@ ParamsSetup (
 		1.0,
 		0.0,
 		1.0,
-		1.0,
+		.11,
 		PF_Precision_HUNDREDTHS,
 		0,
 		0,
@@ -119,7 +119,7 @@ ParamsSetup (
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_COLOR(STR(StrID_ColourOneParamThree),
-		PF_MAX_CHAN8,
+		0,
 		0,
 		0,
 		CONEPTHREE_DISK_ID);
@@ -141,7 +141,7 @@ ParamsSetup (
 		1.0,
 		0.0,
 		1.0,
-		1.0,
+		.44,
 		PF_Precision_HUNDREDTHS,
 		0,
 		0,
@@ -150,8 +150,8 @@ ParamsSetup (
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_COLOR(STR(StrID_ColourTwoParamThree),
+		255,
 		0,
-		PF_MAX_CHAN8,
 		0,
 		CTWOPTHREE_DISK_ID);
 
@@ -172,7 +172,7 @@ ParamsSetup (
 		1.0,
 		0.0,
 		1.0,
-		1.0,
+		.66,
 		PF_Precision_HUNDREDTHS,
 		0,
 		0,
@@ -182,8 +182,8 @@ ParamsSetup (
 
 	PF_ADD_COLOR(STR(StrID_ColourThreeParamThree),
 		0,
-		0,
-		PF_MAX_CHAN8,
+		255,
+		198,
 		CTHREEPTHREE_DISK_ID);
 
 	// colour 4
@@ -203,7 +203,7 @@ ParamsSetup (
 		1.0,
 		0.0,
 		1.0,
-		1.0,
+		.88,
 		PF_Precision_HUNDREDTHS,
 		0,
 		0,
@@ -212,9 +212,9 @@ ParamsSetup (
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_COLOR(STR(StrID_ColourFourParamThree),
-		PF_MAX_CHAN8/2,
-		0,
-		PF_MAX_CHAN8/2,
+		151,
+		244,
+		255,
 		CFOURPTHREE_DISK_ID);
 
 	// colour 5
@@ -234,7 +234,7 @@ ParamsSetup (
 		1.0,
 		0.0,
 		1.0,
-		1.0,
+		.98,
 		PF_Precision_HUNDREDTHS,
 		0,
 		0,
@@ -243,7 +243,7 @@ ParamsSetup (
 	AEFX_CLR_STRUCT(def);
 
 	PF_ADD_COLOR(STR(StrID_ColourFiveParamThree),
-		0,
+		PF_MAX_CHAN8,
 		PF_MAX_CHAN8,
 		PF_MAX_CHAN8,
 		CFIVEPTHREE_DISK_ID);
@@ -251,6 +251,11 @@ ParamsSetup (
 	out_data->num_params = COLOURISER_NUM_PARAMS;
 
 	return err;
+}
+
+static double calculate8BitLum(PF_Pixel8 inputPixel) {
+	double sum = (inputPixel.red + inputPixel.blue + inputPixel.green) / 3 * 0.0039215686274509803921568627451;
+	return sum;
 }
 
 static PF_Err
@@ -264,22 +269,150 @@ colourise8BPC (
 	PF_Err		err = PF_Err_NONE;
 
 	GainInfo	*giP	= reinterpret_cast<GainInfo*>(refcon);
-	PF_FpLong	tempF	= 0;
+	double	colourOneEnabledInt = giP->colourOneEnabled;
+	double	colourOneThreshold = giP->colourOneThreshold;
+	PF_Pixel8	colourOneColour = giP->colourOneColour;
+
+	double	colourTwoEnabledInt = giP->colourTwoEnabled;
+	double	colourTwoThreshold = giP->colourTwoThreshold;
+	PF_Pixel8	colourTwoColour = giP->colourTwoColour;
+
+	double	colourThreeEnabledInt = giP->colourThreeEnabled;
+	double	colourThreeThreshold = giP->colourThreeThreshold;
+	PF_Pixel8	colourThreeColour = giP->colourThreeColour;
+
+	double	colourFourEnabledInt = giP->colourFourEnabled;
+	double	colourFourThreshold = giP->colourFourThreshold;
+	PF_Pixel8	colourFourColour = giP->colourFourColour;
+
+	double	colourFiveEnabledInt = giP->colourFiveEnabled;
+	double	colourFiveThreshold = giP->colourFiveThreshold;
+	PF_Pixel8	colourFiveColour = giP->colourFiveColour;
+
+	double upperBound, lowerBound;
+	double searchThreshold = .1;
+	double tintPercent = .5;
+	PF_FpLong alphaAmount = 255;
+	PF_FpLong roundedVal;
 					
 	if (giP){
-		tempF = giP->gainF * PF_MAX_CHAN8 / 100.0;
-		if (tempF > PF_MAX_CHAN8){
-			tempF = PF_MAX_CHAN8;
-		};
+		// for now, we shall say that the threshold is a luminance between 0-threshold. This may make too many things detected, but for now it works, until I add another variable to add a threshold "range", for how far out form the threshold luminance to look for similar pixels
+		if (colourOneEnabledInt == 1) {
+			upperBound = colourOneThreshold + searchThreshold;
+			lowerBound = colourOneThreshold - searchThreshold;
+			if (calculate8BitLum(*inP) > lowerBound && calculate8BitLum(*inP) < upperBound) {
+				roundedVal = inP->red + colourOneColour.red * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->red = roundedVal;
+				roundedVal = inP->green + colourOneColour.green * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->green = roundedVal;
+				roundedVal = inP->blue + colourOneColour.blue * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->blue = roundedVal;
+				outP->alpha = alphaAmount;
+		}
+		}
+		if (colourTwoEnabledInt == 1) {
+			upperBound = colourTwoThreshold + searchThreshold;
+			lowerBound = colourTwoThreshold - searchThreshold;
+			if (calculate8BitLum(*inP) > lowerBound && calculate8BitLum(*inP) < upperBound) {
+				roundedVal = inP->red + colourTwoColour.red * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->red = roundedVal;
+				roundedVal = inP->green + colourTwoColour.green * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->green = roundedVal;
+				roundedVal = inP->blue + colourTwoColour.blue * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->blue = roundedVal;
+				outP->alpha = alphaAmount;
+			}
+		}
+		if (colourThreeEnabledInt == 1) {
+			upperBound = colourThreeThreshold + searchThreshold;
+			lowerBound = colourThreeThreshold - searchThreshold;
+			if (calculate8BitLum(*inP) > lowerBound && calculate8BitLum(*inP) < upperBound) {
+				roundedVal = inP->red + colourThreeColour.red * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->red = roundedVal;
+				roundedVal = inP->green + colourThreeColour.green * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->green = roundedVal;
+				roundedVal = inP->blue + colourThreeColour.blue * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->blue = roundedVal;
+				outP->alpha = alphaAmount;
+			}
+		}
+		if (colourFourEnabledInt == 1) {
+			upperBound = colourFourThreshold + searchThreshold;
+			lowerBound = colourFourThreshold - searchThreshold;
+			if (calculate8BitLum(*inP) > lowerBound && calculate8BitLum(*inP) < upperBound) {
+				roundedVal = inP->red + colourFourColour.red * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->red = roundedVal;
+				roundedVal = inP->green + colourFourColour.green * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->green = roundedVal;
+				roundedVal = inP->blue + colourFourColour.blue * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->blue = roundedVal;
+				outP->alpha = alphaAmount;
+			}
+		}
+		if (colourFiveEnabledInt == 1) {
+			upperBound = colourFiveThreshold + searchThreshold;
+			lowerBound = colourFiveThreshold - searchThreshold;
+			if (calculate8BitLum(*inP) > lowerBound && calculate8BitLum(*inP) < upperBound) {
+				roundedVal = inP->red + colourFiveColour.red * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->red = roundedVal;
+				roundedVal = inP->green + colourFiveColour.green * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->green = roundedVal;
+				roundedVal = inP->blue + colourFiveColour.blue * tintPercent;
+				if (roundedVal > 255) {
+					roundedVal = 255;
+				}
+				outP->blue = roundedVal;
+				outP->alpha = alphaAmount;
+			}
+		}
 
-		outP->alpha		=	inP->alpha;
-		outP->red		=	MIN((inP->red	+ (A_u_char) tempF), PF_MAX_CHAN8);
-		outP->green		=	MIN((inP->green	+ (A_u_char) tempF), PF_MAX_CHAN8);
-		outP->blue		=	MIN((inP->blue	+ (A_u_char) tempF), PF_MAX_CHAN8);
 	}
 
 	return err;
 }
+
 
 static PF_Err 
 Render (
@@ -297,16 +430,35 @@ Render (
 	A_long				linesL	= 0;
 
 	linesL 		= output->extent_hint.bottom - output->extent_hint.top;
-	//giP.gainF 	= params[NIGHTSKY_NUM_STARS]->u.fs_d.value; 
+	giP.colourOneEnabled 	= params[COLOURISER_CONEPONE]->u.bd.value;
+	giP.colourOneThreshold 	= params[COLOURISER_CONEPTWO]->u.fs_d.value;
+	giP.colourOneColour 	= params[COLOURISER_CONEPTHREE]->u.cd.value;
+
+	giP.colourTwoEnabled = params[COLOURISER_CTWOPONE]->u.bd.value;
+	giP.colourTwoThreshold = params[COLOURISER_CTWOPTWO]->u.fs_d.value;
+	giP.colourTwoColour = params[COLOURISER_CTWOPTHREE]->u.cd.value;
+
+	giP.colourThreeEnabled = params[COLOURISER_CTHREEPONE]->u.bd.value;
+	giP.colourThreeThreshold = params[COLOURISER_CTHREEPTWO]->u.fs_d.value;
+	giP.colourThreeColour = params[COLOURISER_CTHREEPTHREE]->u.cd.value;
+
+	giP.colourFourEnabled = params[COLOURISER_CFOURPONE]->u.bd.value;
+	giP.colourFourThreshold = params[COLOURISER_CFOURPTWO]->u.fs_d.value;
+	giP.colourFourColour = params[COLOURISER_CFOURPTHREE]->u.cd.value;
+
+	giP.colourFiveEnabled = params[COLOURISER_CFIVEPONE]->u.bd.value;
+	giP.colourFiveThreshold = params[COLOURISER_CFIVEPTWO]->u.fs_d.value;
+	giP.colourFiveColour = params[COLOURISER_CFIVEPTHREE]->u.cd.value;
+
 		ERR(suites.Iterate8Suite1()->iterate(	in_data,
 												0,								// progress base
-												linesL,							// progress final
+												output->height,							// progress final
 												&params[COLOURISER_INPUT]->u.ld,	// src 
 												NULL,							// area - null for all pixels
 												(void*)&giP,					// refcon - your custom data pointer
 			colourise8BPC,				// pixel function pointer
 												output));	
-	
+
 
 	return err;
 }

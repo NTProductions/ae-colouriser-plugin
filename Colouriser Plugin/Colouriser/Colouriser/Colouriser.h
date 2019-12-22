@@ -106,7 +106,21 @@ enum {
 };
 
 typedef struct GainInfo{
-	PF_FpLong	gainF;
+	PF_FpLong	colourOneEnabled;
+	PF_FpLong	colourOneThreshold;
+	PF_Pixel	colourOneColour;
+	PF_FpLong	colourTwoEnabled;
+	PF_FpLong	colourTwoThreshold;
+	PF_Pixel	colourTwoColour;
+	PF_FpLong	colourThreeEnabled;
+	PF_FpLong	colourThreeThreshold;
+	PF_Pixel	colourThreeColour;
+	PF_FpLong	colourFourEnabled;
+	PF_FpLong	colourFourThreshold;
+	PF_Pixel	colourFourColour;
+	PF_FpLong	colourFiveEnabled;
+	PF_FpLong	colourFiveThreshold;
+	PF_Pixel	colourFiveColour;
 } GainInfo, *GainInfoP, **GainInfoH;
 
 
